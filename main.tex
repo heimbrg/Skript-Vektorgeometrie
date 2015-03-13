@@ -1,0 +1,157 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[justified,openany,nofonts]{tufte-book}
+\usepackage{mooculus}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage{siunitx}
+\usepackage{esvect}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{matrix, positioning}
+\usepackage{booktabs}
+
+%\usepackage{showkeys} %% Useful for debugging
+
+\setcounter{secnumdepth}{2}
+\renewcommand{\figurename}{Abbildung}
+
+\newcommand*{\mybox}[2]{\colorbox{#1!30}{#2}}
+
+% Prints the month name (e.g., January) and the year (e.g., 2008)
+\newcommand{\monthyear}{%
+  \ifcase\month\or January\or February\or March\or April\or May\or June\or
+  July\or August\or September\or October\or November\or
+  December\fi\space\number\year
+}
+
+% Generates the index
+\usepackage{makeidx}
+\makeindex
+
+\newcommand{\xrefn}[1]{\ref{#1}}
+\renewcommand{\tablename}{Tabelle}
+
+%Vektoren
+\newcommand{\Vek}[3]{\left(\begin{array}{r}#1\\#2 
+\ifthenelse{\equal{#3}{}}{}{\\#3}\end{array}\right)}
+
+\newcommand{\Vk}[1]{\left(\begin{array}{r}#1_{1}\\#1_{2}\\#1_{3}\end{array}\right)}
+
+\newcommand{\skap}[2]{\left(\begin{array}{r}#1_{1}\\#1_{2}\\#1_{3}\end{array}\right) \cdot \left(\begin{array}{r}#2_{1}\\#2_{2}\\#2_{3}\end{array}\right)}
+
+\newcommand{\vekp}[2]{\left(\begin{array}{r}#1_{1}\\#1_{2}\\#1_{3}\end{array}\right) \times \left(\begin{array}{r}#2_{1}\\#2_{2}\\#2_{3}\end{array}\right)} 
+
+\newenvironment{lemma}{\subsection*{Lemma}}{}
+\newenvironment{remark}[1]{\subsection*{Remark: #1}}{}
+
+
+%\def\exam{\null}
+\def\pagerdef{\null}
+
+\def\dfont{\bf}
+\def\em{\it}           % for emphasis
+
+\newcommand{\ds}{\displaystyle}
+
+\let\ssk\smallskip \let\msk\medskip \let\bsk\bigskip
+
+\usepackage{multicol}
+\def\twocol{\begin{multicols}{2}}
+\def\endtwocol{\end{multicols}}
+
+\title{Vektorgeometrie}
+%\author{Jim Fowler and Bart Snapp}
+\publisher{Zuletzt bearbeitet: \today.}
+%\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage}
+
+%% % Prints an epigraph and speaker in sans serif, all-caps type.
+%% \newcommand{\openepigraph}[2]{%
+%%   %\sffamily\fontsize{14}{16}\selectfont
+%%   \begin{fullwidth}
+%%   \sffamily\large
+%%   \begin{doublespace}
+%%   \noindent\allcaps{#1}\\% epigraph
+%%   \noindent\allcaps{#2}% author
+%%   \end{doublespace}
+%%   \end{fullwidth}
+%% }
+
+
+
+
+\begin{document}
+\maketitle
+
+% v.4 copyright page
+
+
+\begin{fullwidth}
+~\vfill
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+Matthias Heimberg
+
+Gymnasium Oberaargau \url{gymo.ch}
+
+
+
+\end{fullwidth}
+
+
+\tableofcontents
+
+
+%% \renewcommand{\listtheoremname}{List of Main Theorems}
+%% \setcounter{tocdepth}{1}
+%% \listoftheorems[numwidth=4em,ignoreall,show={mainTheorem}]
+
+
+
+\chapter*{Die wichtigsten Sätze}% uses ntheorem
+\theoremlisttype{opt}
+\listtheorems{mainTheorem}
+
+
+
+\chapter*{Wie Sie ein Mathematikskript lesen}
+
+Ein Mathematikskript können Sie \textbf{nicht} wie einen Roman lesen! Um Mathematik zu lesen benötigen Sie:
+\begin{enumerate}
+\item Einen Stift.
+\item Viel leeres Papier.
+\item Den Willen, Dinge niederzuschreiben.
+\end{enumerate}
+Wenn Sie Mathematik lesen, sollten Sie gleichzeitig diese Dinge ver\textbf{arbeiten}. Das bedeutet: Jeden Ausdruck \textbf{aufschreiben}, jeden Graphen \textbf{skizzieren}, darüber \textbf{nachdenken} was Sie machen. Arbeiten Sie die Beispiele selbst durch und ergänzen Sie die Details. Dies ist keine simple Aufgabe, es ist \textbf{harte} Arbeit! Mathematik ist keine passive Reise, es passiert nicht von selbst, Sie müssen selbst die Mathematik machen!
+
+
+
+\setcounter{chapter}{0}
+
+%%
+% Start the main matter (normal chapters)
+%\mainmatter
+%\tikzexternaldisable
+\input 1Vektoren
+\input 2Skalarprodukt
+\input 3Vektorprodukt
+
+
+%\bibliography{sample-handout}
+%\bibliographystyle{plainnat}
+
+%\finalizeanswers
+%\chapter*{Answers to Exercises}
+%\small
+%\addcontentsline{toc}{chapter}{Answers to Exercises}
+%\IfFileExists{answers.tex}{\input{answers}}
+%\normalsize
+%\backmatter
+%\addcontentsline{toc}{chapter}{Index}
+\printindex
+
+
+\end{document}
+
+
+
+%sagemathcloud={"zoom_width":95}

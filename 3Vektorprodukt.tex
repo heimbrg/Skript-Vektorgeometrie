@@ -1,0 +1,357 @@
+\chapter{Vektorprodukt}
+\section{Einführung}
+Das Skalarprodukt ordnet zwei Vektoren einen Skalar zu, beim \textit{Vektorprodukt} soll nun das Resultat ein Vektor sein. Wie das Skalarprodukt ist auch das Vektorprodukt in der Physik sehr wichtig, beispielsweise für die Bestimmung der Lorentzkraft im Elektromagnetismus. Im Rahmen unserer analytischen Geometrie wird das Vektorprodukt unterschiedlich eingesetzt. So ist es vor allem dort wichtig, wo es um das Senkrechtstehen auf zwei vorgegebenen Richtungen geht; es dient aber auch der Berechnung von Flächeninhalten.
+
+Bei der Theorie über das Skalarprodukt sind wir von einer geometrischen Definition ausgegangen und haben dann die algebraische Beschreibung, d.h. die Komponentendarstellung, hergeleitet. Beim Vektorprodukt soll nun der umgekehrte Weg eingeschlagen werden: Wir entwickeln zuerst die Komponentendarstellung und betrachten diese als Definition des Vektorproduktes, um anschliessend seine geometrischen Eigenschaften zu untersuchen.
+
+\section{Algebraische Beschreibung des Vektorproduktes}
+Die Problemstellung lautet folgendermassen:
+\[ \Vk{a} \times \Vk{b} = \Vek{?}{?}{?} \]
+Das Vektorprodukt soll zwei Vektoren einen neuen Vektor zuordnen (als Operationszeichen wird $\times$, sprich ``kreuz'', verwendet). Wie sind die Komponenten dieses Vektors zu definieren?
+
+Wir fragen zunächst, welche Richtung der Produktvektor $\vv{x}$ bezüglich der Operanden $\vv{a}$ und $\vv{b}$ haben soll. In der Physik steht die Lorentzkraft senkrecht auf Bewegungsrichtung und Magnetfeld (beides Vektorgrössen). Deshalb verlangen wir dass der Produktvektor $\vv{x}$ senkrecht auf den beiden Operanden stehen soll. Das heisst:
+\begin{align*}
+\vv{x} \text{ senkrecht } \vv{a} &&    & \vv{x} \cdot \vv{a}=0 \\
+       \text{ und }                          & & \Leftrightarrow \qquad \qquad \qquad \quad & \text{ und } \\
+ \vv{x} \text{ senkrecht } \vv{b} & &   & \vv{x} \cdot \vv{b} = 0
+\end{align*}
+Mit den Komponentendarstellungen $\vv{a} = \Vk{a}$, $\vv{b} = \Vk{b}$ sowie $\vv{x} = \Vk{x}$ ergibt sich ein Gleichungssystem mit zwei Gleichungen und den drei Unbekannten $x_{1}$, $x_{2}$, und $x_{3}$, bei dem wir mit der Additionsmethode $x_{3}$ eliminieren:
+\begin{align*} 
+    a_{1} x_{1} + a_{2} x_{2} + a_{3} x_{3} &= 0 && | b_{3} \\ 
+    b_{1} x_{1} + b_{2} x_{2} + b_{3} x_{3} &= 0 && | (-a_{3}) \\
+    \qquad \\
+    \underbrace{(a_{1} b_{3} - a_{3} b_{1} )}_{c} x_{1} + \underbrace{(a_{2} b_{3} - a_{3} b_{2} )}_{d} x_{2} &= 0 &&
+\end{align*} 
+Es resultiert nun folgende Lösung ($x_{3}$ erraten und mit Einsetzen überprüfen):
+\begin{eqnarray*}
+    x_{1} &=d&= a_{2} b_{3} - a_{3} b_{2} \\
+    x_{2} &=-c&= a_{3} b_{1} - a_{1} b_{3} \\
+    x_{3} &=&= a_{1} b_{2} - a_{2} b_{1} 
+\end{eqnarray*}
+Es ist nun eine Auswahl zu treffen, denn auch $\vv{x} = k \Vek{a_{2} b_{3} - a_{3} b_{2}}{a_{3} b_{1} - a_{1} b_{3}}{a_{1} b_{2} - a_{2} b_{1}}$ mit $k \in \mathbb{R}$ ist eine Lösung. Der Betrag von $\vv{x}$ ist ja nicht festgelegt mit der Forderung, dass $\vv{x}$ senkrecht auf $\vv{a}$ und $\vv{b}$ stehen soll. Welche der unendlich vielen Lösungen wollen wir nun für das Vektorprodukt verwenden? Die Betrachtung eines Spezialfalls soll uns diesen Entscheid erleichtern: \newline
+$ \vv{a} = \vv{e_{1}} = \Vek{1}{0}{0}$ und $\vv{b} = \vv{e_{2} } = \Vek{0}{1}{0}$. Die Lösunge mit $k=1$ ergibt dann $\vv{x} = \vv{e_{3} } = \Vek{0}{0}{1}$. Auf Grund der Ästhetik dieses Resultates nehmen wir die Lösung mit $k=1$.
+
+\begin{definition}\index{Vektorprodukt}
+Das \textit{Vektorprodukt} ist wie folgt definiert:
+\[ \vekp{a}{b} = \Vek{a_{2} b_{3} - a_{3} b_{2}}{a_{3} b_{1} - a_{1} b_{3}}{a_{1} b_{2} - a_{2} b_{1}} \]
+\end{definition}
+
+\begin{marginfigure}[4cm]
+\begin{tikzpicture}[
+  mymathmatrix/.style={
+    matrix of math nodes,
+    inner sep=0.1em, column sep=0.2em,
+    nodes={text width=1.5em,align=center,font=\mathstrut},
+    left delimiter=(,right delimiter=)
+  }
+  ]
+\matrix (A) [mymathmatrix]{a_{1}\\a_{2}\\a_{3}\\};
+\node[right=1em of A](+){$\times$};
+\matrix (B) [right=1em of +, mymathmatrix]{b_{1}\\b_{2}\\b_{3}\\};
+\node[right=1em of B](=){%
+= 
+\begin{pmatrix} 
+a_{2} b_{3} - a_{3} b_{2} \\ 
+... \\ 
+... 
+\end{pmatrix}
+};
+
+% Durchstreichen
+\draw[red, shorten >=-1em, shorten <=-1em](A-1-1.west)--(B-1-1.east);
+
+%Überkreuzmultiplikation
+\draw[red, thick, ->](A-2-1)--(B-3-1);
+\draw[red, thick, densely dashed, ->](A-3-1)--(B-2-1);
+\end{tikzpicture} \\
+
+% ------------------------------
+% ------------------------------
+
+
+% 2. Zeile
+
+\begin{tikzpicture}[
+  mymathmatrix/.style={
+    matrix of math nodes,
+    inner sep=0.1em, column sep=0.2em,
+    nodes={text width=1.5em,align=center,font=\mathstrut},
+    left delimiter=(,right delimiter=)
+  }
+  ]
+\matrix (A) [mymathmatrix]{a_{1}\\a_{2}\\a_{3}\\};
+\node[right=1em of A](+){$\times$};
+\matrix (B) [right=1em of +, mymathmatrix]{b_{1}\\b_{2}\\b_{3}\\};
+\node[right=1em of B](=){%
+= 
+\begin{pmatrix}
+...\\ 
+\textcolor{red}{-} (a_1 b_3 - a_3 b_1) \\ 
+... \\
+\end{pmatrix}
+};
+
+% Durchstreichen
+\draw[red, shorten >=-1em, shorten <=-1em](A-2-1.west)--(B-2-1.east);
+
+%Überkreuzmultiplikation
+\draw[red, thick, ->](A-1-1)--(B-3-1);
+\draw[red, thick, densely dashed, ->](A-3-1)--(B-1-1);
+
+% Kreuz neu zeichnen
+\node[right=1em of A](+){$\times$};
+
+
+\end{tikzpicture} \\
+
+% ------------------------------
+% ------------------------------
+
+
+ % 3. Zeile
+
+\begin{tikzpicture}[
+  mymathmatrix/.style={
+    matrix of math nodes,
+    inner sep=0.1em, column sep=0.2em,
+    nodes={text width=1.5em,align=center,font=\mathstrut},
+    left delimiter=(,right delimiter=)
+  }
+  ]
+\matrix (A) [mymathmatrix]{a_{1}\\a_{2}\\a_{3}\\};
+\node[right=1em of A](+){$\times$};
+\matrix (B) [right=1em of +, mymathmatrix]{b_{1}\\b_{2}\\b_{3}\\};
+\node[right=1em of B](=){%
+= 
+\begin{pmatrix}... \\ 
+... \\ 
+a_1 b_2 - a_2 b_1 \end{pmatrix}
+};
+
+% Durchstreichen
+\draw[red, shorten >=-1em, shorten <=-1em](A-3-1.west)--(B-3-1.east);
+
+%Überkreuzmultiplikation
+\draw[red, thick, ->](A-1-1)--(B-2-1);
+\draw[red, thick, densely dashed, ->](A-2-1)--(B-1-1);
+
+\end{tikzpicture} \\
+\caption{Merkhilfe zum Vektorprodukt}
+\end{marginfigure}
+
+\begin{example}
+Berechnen Sie das folgende Vektorprodukt:
+\[ \Vek{-3}{1}{2} \times \Vek{-1}{1}{3} = \]
+\end{example}
+
+\begin{solution}
+\[ \Vek{-3}{1}{2} \times \Vek{-1}{1}{3} = \Vek{1 \cdot 3 - 2 \cdot 1}{-(-3 \cdot 3 - (2 \cdot -1))}{-3 \cdot 1 - (1 \cdot -1)} = \Vek{1}{7}{-2} \]
+\end{solution}
+
+\section{Geometrische Eigenschaften des Vektorproduktes}
+Im Folgenden seien $\vv{a}$ und $\vv{b}$ zwei nicht kollineare Vektoren. Wir finden die folgenden geometrischen Eigenschaften:
+\begin{enumerate}[I]
+\item \mybox{yellow}{$\vv{a} \times \vv{b}$ steht senkrecht auf $\vv{a}$ und $\vv{b}$.} (Wie oben festgelegt wurde).
+\item \mybox{yellow}{$| \vv{a} \times \vv{b} |$ ist der Inhalt eines von $\vv{a}$ und $\vv{b}$ aufgespannten Parallelogramms.}
+\end{enumerate}
+\begin{proof}
+Wir betrachten das Quadrat des Inhalts $I$ um Wurzeln zu vermeiden. Bei stumpfem Zwischenwinkel $\epsilon$ kann zusätzlich die Beziehung $\sin{(\SI{180}{\degree} - \epsilon)} = \sin{\epsilon}$ verwendet werden.
+\begin{align*}
+    I^{2}   &= |\vv{a}|^{2} h^{2}  = |\vv{a}|^{2} |\vv{b}|^{2} - (\vv{a} \cdot \vv{b}){2} \\
+            &= |\vv{a}|^{2} |\vv{b}|^{2} (1-\cos^{2}{\epsilon}) = |\vv{a}|^{2} |\vv{b}|^{2} - (\vv{a} \cdot \vv{b})^{2} \\
+            &= (a_{1}^{2} + a_{2}^{2} + a_{3}^{2})(b_{1}^{2} + b_{2}^{2} + b_{3}^{2})-(a_{1}b_{1} + a_{2}b_{2} + a_{3}b_{3})^{2}\\
+            &= (a_{1}^{2} b_{3}^{2}+ a_{3}^{2} b_{2}^{2} - 2 a_{2}b_{2}a_{3}b_{3}) + (a_{3}^{2}b_{1}^{2}+a_{1}^{2}b_{3}^{2} - 2 a_{3}b_{3} a_{1} b_{1})\\
+            & \quad + (a_{1}^{2}b_{2}^{2} + a_{2}^{2} b_{1}^{2} - 2 a_{1} b_{1} a_{2} b_{2}) \\
+            &=|\vv{a} \times \vv{b}|^{2} 
+\end{align*}
+\end{proof}
+\begin{enumerate}[I]
+\setcounter{enumi}{2}
+\item \mybox{yellow}{$\vv{a}$, $\vv{b}$, $\vv{a} \times \vv{b}$ bilden in dieser Reihenfolge ein Rechtssystem.}\newline
+Voraussetzung ist, wie bei der Einführung des Koordinatensystems vereinbart, dass schon die Basisvektoren in der Reihenfolge $\vv{e_{1}}$, $\vv{e_{2}}$, $\vv{e_{3}}$ ein Rechtssystem bilden.
+\end{enumerate}
+
+\section{Rechengesetze für das Vektorprodukt}
+\begin{theorem}
+\[ \vv{a} \times \vv{b} = - (\vv{b} \times \vv{a} )\]
+Man sagt, das Vektorprodukt sei \textit{antikommutativ}.
+\end{theorem}
+
+\begin{theorem}
+\[ \vv{a} \times \vv{0} = \vv{0} \]
+\end{theorem}
+\begin{theorem}
+\[ \vv{a} \times \vv{a} = \vv{0} \]
+\end{theorem}
+
+Im Allgemeinen gilt das Assoziativgesetz $\vv{a} \times (\vv{b} \times \vv{c} )= (\vv{a} \times \vv{b}) \times \vv{c}$ nicht, was durch Angabe eines Gegenbeispiels leicht zu verifizieren ist.
+
+\begin{warning}
+Mehrere wichtige, vom Zahlenrechnen bekannte Gesetze gelten nicht mehr, sobald Vektorprodukte beteiligt sind! Da wir aber kaum Umformungen von Termen mit Vektorprodukten vornehmen werden, entstehen deswegen keine Probleme.
+\end{warning}
+Da der Betrag des Vektorproduktes als Inhalt eines Parallelogramms gedeutet werden kann, lassen sich Dreiecks- und darauf basierend Vielecksinhalte berechnen. Für Dreiecke nennen wir eine unmittelbar resultierende Flächenformel:
+\begin{theorem}[Flächenformel]
+Inhalt $I$ eines Dreiecks $ABC$:
+\[ I = \frac{|\vv{AB} \times \vv{AC}|}{2} \]
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%% ÜBUNGEN %%%%%%%%%%%%%%%%%%%%
+
+\begin{exercisesKapitel}
+
+\begin{exercise}
+$A=(1/1/1)$, $B=(4/3/3)$, $C=(0/-1/3)$ 
+\begin{enumerate}
+\item Berechnen Sie den Inhalt des Dreiecks $ABC$!
+\item Es gibt zwei Tetraeder $ABCD$ mit Volumen 18, für die je der Fusspunkt der von $D$ ausgehenden Höhe die Mitte von $BC$ ist. Bestimmen Sie die zugehörigen Ecken $D$!
+\end{enumerate}
+\begin{answer}
+\begin{enumerate}
+\item Inhalt 6
+\item Ecken: $D_{1} = (8/-5/0)$, $D_{2}=(-4/7/6)$
+\end{enumerate}
+\end{answer}
+\end{exercise}
+
+
+\begin{exercise}
+$A=(3/3/2)$, $B=(41/1/1)$, $C=(-1/2/3)$ \newline
+$AB$ und $BC$ seien zwei Kanten eines Würfels.
+\begin{enumerate}
+\item Wie viele Würfel mit diesen Kanten gibt es, und wie viel beträgt ihr Volumen?
+\item Bestimmen Sie alle übrigen Ecken des Würfels, für den $\vv{BA}$, $\vv{BC}$, $\vv{BF}$ ($BF$ ist die dritte von $B$ ausgehende Würfelkante) in dieser Reihenfolge ein Linkssystem bilden.
+\end{enumerate}
+\begin{answer}
+\begin{enumerate}
+\item 2 Würfel, Volumen 27
+\item Übrige Ecken: $(1/4/4)$, $(2/5/0)$, $(0/3/-1)$, $(-2/4/1)$, $(0/6/2)$
+\end{enumerate}
+\end{answer}
+\end{exercise}
+
+\begin{exercise}
+Zeigen Sie: $ |k \vv{a} \times \vv{b} | = | \vv{a} \times k \vv{b}| = |k| |\vv{a} \times \vv{b} | $
+\begin{answer}
+Mit der Beziehung $|\vv{a} \times \vv{b} | = |\vv{a} | |\vv{b}| \sin{\epsilon}$ sowie dem Gesetz $| k \vv{a} | = |k | |\vv{a} |$ arbeiten. Auch eine unmittelbare geometrische Deutung ist möglich.
+\end{answer}
+\end{exercise}
+
+\begin{exercise}
+$\vv{a} = \Vek{x}{1}{2}$, $\vv{b} = \Vek{2}{0}{1}$ \newline
+Für welche $x$ hat das von $\vv{a}$ und $\vv{b}$ aufgespannte Parallelogramm den Inhalt 3?
+\begin{answer}
+$ | \vv{a} \times \vv{b} | = 3 \rightarrow x_{1} = 2, x_{2} = 6$
+\end{answer}
+\end{exercise}
+
+\begin{exercise}
+$A=(8/5/7)$, $B=(5/5/4)$, $M=(4/3/2)$ \newline
+Berechnen Sie für das Parallelogramm $ABCD$ mit Mittelpunkt $M$:
+\begin{enumerate}
+\item den Inhalt $I$
+\item die Höhe $h_{a}$
+\end{enumerate}
+\begin{answer}
+Flächenformel verwenden
+\begin{enumerate}
+\item $I=2 | \vv{AB} \times \vv{AM} | = 18$
+\item $h_{a} = \frac{I}{|\vv{AB}|} = \sqrt{18}$
+\end{enumerate}
+\end{answer}
+\end{exercise}
+
+\begin{exercise}
+$A=(3/5/5)$, $B=(1/1/1)$, $C=(5/3/-3)$ \newline
+$ABCD$ ist die Grundfläche einer geraden quadratischen Pyramide mit der Höhe $h=9$. Bestimmen Sie die beiden möglichen Spitzen $S$!
+\begin{answer}
+Diagonalenschnittpunkt der quadratischen Grundfläche: $M=(4/4/1)$
+\[ \vv{OS}_{1,2} = \vv{OM} \pm \frac{9}{| \vv{AB} \times \vv{AC} |} \vv{AB} \times \vv{AC} \rightarrow S_{1} = (10/-2/4), S_{2} = (-2/10/-2) \]
+\end{answer}
+\end{exercise}
+
+\begin{exercise}
+$A=(10/0/0)$, $B=(0/6/0)$, $C=(0/0/4)$ \newline
+Die je auf einer Koordinatenachse liegenden Punkte $A$, $B$, $C$ und der Ursprung $O$ seinen die Ecken eines Tetraeders. Berechnen Sie für dieses Tetraeder:
+\begin{enumerate}
+\item Die Oberfläche $S$
+\item Die Länge $h$ der Höhe, welche nicht mit einer Kante zusammenfällt.
+\end{enumerate}
+\begin{answer}
+\begin{enumerate}
+\item $S=30+20+12+\frac{1}{2} |\vv{AB} \times \vv{AC}| = 100$
+\item $6V = 10 \cdot 6 \cdot 4 = 240$, $h=\frac{6V}{ |\vv{AB} \times \vv{AC}|} = 3.16$
+\end{enumerate}
+\end{answer}
+\end{exercise}
+
+
+\begin{exercise}
+$A=(0/10/4)$, $B=(2/14/8)$ \newline
+Für welche Punkte $C$ auf der $x$-Achse hat das Dreieck $ABC$ den Inhalt 18?
+\begin{answer}
+Flächenformel für $ABC$ mit $C=(x/0/0)$ verwenden $\rightarrow C_{1} = (1/0/0), C_{2} = (-8/0/0)$
+\end{answer}
+\end{exercise}
+
+\begin{exercise}
+$A=(6/8/3)$, $B=(3/2/1)$, $C=(9/0/-2)$ \newline
+Die Punkte $A$, $B$ und $C$ sind die Ecken der Grundfläche eines geraden dreiseitigen Prismas mit Volumen 343. Die entsprechenden Ecken der Deckfläche seien $D$, $E$ und $F$. Bestimmen Sie diese Ecken!
+\begin{answer}
+Prismahöhe: $h=\frac{2V}{|\vv{AB} \times \vv{AC} |} = 14$ \newline
+$\vv{OD} _{1,2} = \vv{OA} \pm \frac{h}{|\vv{AB} \times \vv{AC} |} \vv{AB} \times \vv{AC} \rightarrow D_{1} (10/2/15), D_{2} = (2/14/-9)$
+$\vv{OE}_{1,2} = \vv{OD}_{1,2} + \vv{AB} \rightarrow E_{1} = (7/-4/13), E_{2} = (-1/8/-11)$
+$\vv{OF}_{1,2} = \vv{OD}_{1,2} + \vv{AC} \rightarrow F_{1} = (13/-6/10), F_{2} = (5/6/-14)$
+
+\end{answer}
+\end{exercise}
+
+\begin{exercise}
+$P=(0/0/1)$, $Q=(-3/4/3)$, $R=(5/-3/5)$ \newline
+Die drei Punkte $P$, $Q$ und $R$ sind die Mittelpunkte von Kugeln je mit Radius 3. Man denke sich eine Ebene, die alle drei Kugeln so berührt, dass ihre Mittelpunkte auf derselben Seite der Ebene liegen.
+\begin{enumerate}
+\item Bestimmen Sie die beiden möglichen Berührungspunkte der Kugel mit Mittelpunkt $P$
+\item Wie viel beträgt der Inhalt $I$ des Dreiecks, das durch die drei Berührungspunkte bestimmt ist?
+\end{enumerate}
+
+\begin{answer}
+\begin{enumerate}
+\item $\vv{PQ} \times \vv{PR} = 11 \Vek{2}{2}{-1}$, $\vv{OB}_{1,2}=\vv{OP} \pm \Vek{2}{2}{-1} \rightarrow B_{1} = (2/2/0), B_{2} = (-2/-2/2)$
+\item $I=\frac{1}{2} |\vv{PQ} \times \vv{PR}| = 16.5$ ($PQR$ kongruent zum Berührungspunkt-Dreieck).
+\end{enumerate}
+\end{answer}
+\end{exercise}
+
+\begin{exercise}
+Es seien $\vv{a} \neq \vv{0}$ und $\vv{b} \neq \vv{0}$.
+\begin{enumerate}
+\item Für welche Vektoren gilt $|\vv{a} \times \vv{b}| = |\vv{a}| |\vv{b}| $?
+\item Für welche Vektoren gilt $\vv{a} \times \vv{b} = \vv{0} $?
+\item Gilt das Assoziativgesetz $(\vv{a} \times \vv{b}) \times \vv{c}= \vv{a} \times ( \vv{b} \times \vv{c})$? Begründen Sie!
+\end{enumerate}
+\begin{answer}
+\begin{enumerate}
+\item Vektoren, die senkrecht aufeinander stehen
+\item Vektoren, die kollinear sind
+\item Das Assoziativgesetz gilt nicht! Gegenbeispiel: $\vv{a} = \Vek{1}{0}{0}$, $\vv{b}=\Vek{0}{1}{0}$, $\vv{c}=\Vek{0}{0}{1}$
+\end{enumerate}
+\end{answer}
+\end{exercise}
+
+\begin{exercise}
+Wie lässt sich mit Hilfe von Vektor- und Skalarprodukt entscheiden, ob vier verschiedene Punkte in einer Ebene liegen? Wie verhält es sich diesbezüglich mit
+\begin{enumerate}
+\item $A=(2/1/4)$, $B=(3/2/1)$, $C=(4/3/0)$, $D=(1/0/0)$?
+\item $A=(-1/1/5)$, $B=(0/2/6)$, $C=(0/1/3)$, $D=(4/3/2)$?
+\end{enumerate}
+\begin{answer}
+Die vier Punkte liegen in einer Ebene, wenn gilt: $(\vv{AB} \times \vv{AC}) \cdot \vv{AD} = 0$
+\begin{enumerate}
+\item ja
+\item nein
+\end{enumerate}
+\end{answer}
+\end{exercise}
+
+
+\end{exercisesKapitel}
+
